@@ -45,9 +45,38 @@ export default function PlaceOrderScreen() {
   cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
 
   const placeOrderHandler = async () => {
+    cart.cartItems.map((item) => stockHandler({ item }));
+
+    orderHandler();
+  };
+
+  const stockHandler = async (item) => {
     try {
       dispatch({ type: 'CREATE_REQUEST' });
+      console.log(cart.cartItems);
+      console.log(item);
+      console.log(item.item._id);
+      await Axios.put(
+        `/api/products/downstock/${item.item._id}`,
+        {
+          quantitys: item.item.quantity,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${userInfo.token}`,
+          },
+        }
+      );
+      dispatch({ type: 'CREATE_SUCCESS' });
+    } catch (err) {
+      dispatch({ type: 'CREATE_FAIL' });
+      toast.error(getError(err));
+    }
+  };
 
+  const orderHandler = async () => {
+    try {
+      dispatch({ type: 'CREATE_REQUEST' });
       const { data } = await Axios.post(
         '/api/orders',
         {

@@ -35,6 +35,10 @@ import SupplierListScreen from './screens/SupplierListScreen';
 import SupplierEditScreen from './screens/SupplierEditScreen';
 import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
+import ValueeListScreen from './screens/ValueeListScreen';
+import ValueeEditScreen from './screens/ValueeEditScreen';
+import ConfigurationListScreen from './screens/ConfigurationListScreen';
+import ConfigurationEditScreen from './screens/ConfigurationEditScreen';
 import MapScreen from './screens/MapScreen';
 
 function App() {
@@ -139,6 +143,12 @@ function App() {
                       </LinkContainer>
                       <LinkContainer to="/admin/users">
                         <NavDropdown.Item>Users</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/admin/valuees">
+                        <NavDropdown.Item>Values</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/admin/configurations">
+                        <NavDropdown.Item>Configurations</NavDropdown.Item>
                       </LinkContainer>
                     </NavDropdown>
                   )}
@@ -266,6 +276,22 @@ function App() {
                 }
               ></Route>
               <Route
+                path="/admin/valuees"
+                element={
+                  <AdminRoute>
+                    <ValueeListScreen />
+                  </AdminRoute>
+                }
+              ></Route>
+              <Route
+                path="/admin/configurations"
+                element={
+                  <AdminRoute>
+                    <ConfigurationListScreen />
+                  </AdminRoute>
+                }
+              ></Route>
+              <Route
                 path="/admin/product/:id"
                 element={
                   <AdminRoute>
@@ -278,6 +304,22 @@ function App() {
                 element={
                   <AdminRoute>
                     <UserEditScreen />
+                  </AdminRoute>
+                }
+              ></Route>
+              <Route
+                path="/admin/valuee/:id"
+                element={
+                  <AdminRoute>
+                    <ValueeEditScreen />
+                  </AdminRoute>
+                }
+              ></Route>
+              <Route
+                path="/admin/configuration/:id"
+                element={
+                  <AdminRoute>
+                    <ConfigurationEditScreen />
                   </AdminRoute>
                 }
               ></Route>
